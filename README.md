@@ -65,6 +65,10 @@ Watch a quick demo of the project here:
 
 <a href="https://langfuse.com/watch-demo"><img width="37.5%" alt="Langfuse Overview Video" src=".github/watch-demo.png"></a>
 
+## My Notes
+
+[我的笔记](./mynotes/README.md)
+
 > ### 🧑‍💻 We're hiring
 >
 > Interested in contributing to Langfuse full-time? Langfuse is growing fast (we doubled the team in the last 6 months). Since January 2026 we're part of ClickHouse. We hire remotely, with offices in Berlin, San Francisco, Amsterdam, and New York.
@@ -221,18 +225,25 @@ LANGFUSE_BASE_URL="https://cloud.langfuse.com" # 🇪🇺 EU region
 
 ```python /@observe()/ /from langfuse.openai import openai/ filename="main.py"
 from langfuse import observe
-from langfuse.openai import openai # OpenAI integration
+from langfuse.openai import openai  # OpenAI integration
+
 
 @observe()
 def story():
-    return openai.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": "What is Langfuse?"}],
-    ).choices[0].message.content
+    return (
+        openai.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": "What is Langfuse?"}],
+        )
+        .choices[0]
+        .message.content
+    )
+
 
 @observe()
 def main():
     return story()
+
 
 main()
 ```
