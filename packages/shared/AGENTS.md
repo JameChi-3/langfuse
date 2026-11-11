@@ -61,8 +61,8 @@
 - Dashboard/monitor query feature (data model + server-only builder/executor): `src/features/query/*`
 - Query-builder AST (server half, WIP): `src/server/query-ast/*` — the Kysely
   ClickHouse dialect (ARRAY JOIN / LIMIT BY / FINAL / metadata subscript nodes,
-  single-project tenancy injection, per-table soft-delete filtering and
-  dedup lowering, virtual views, catalog parity). Compile only through
+  single-project tenancy injection, per-table dedup lowering, virtual views,
+  catalog parity). Compile only through
   `compileClickhouseQuery` in `src/server/query-ast/compile.ts`. SQL
   correctness is proven by a golden-SQL harness
   (`src/server/repositories/goldenHarness.ts`, capturing at the

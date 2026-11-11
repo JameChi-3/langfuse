@@ -3,8 +3,8 @@
  * expressions over a query that reads events as `e`, and its free-text
  * `search` to a separate expression. `compileEventsPredicate` /
  * `compileEventsSearch` render either as `{ sql, params, requiresEventsFull }`
- * for the raw-SQL builders: after the project and soft-delete conditions,
- * the SQL `FilterList` and `eventSearchCondition` emit for the same filter
+ * for the raw-SQL builders: after the project condition, the SQL
+ * `FilterList` and `eventSearchCondition` emit for the same filter
  * (`events-predicate.golden.test.ts`).
  *
  * Out of scope: score and comment fields (they need a join or aggregation
@@ -122,9 +122,9 @@ export type CompiledEventsCondition = {
 
 /**
  * `predicate` as SQL over events read as `e` in `projectId`, for the raw-SQL
- * builders: the project and soft-delete conditions the compiler passes
- * inject, then the `FilterList` text for a conjunction of conditions, or
- * `true` for an empty one. Never empty, so callers splice `AND ${sql}`.
+ * builders: the project condition the tenancy pass injects, then the
+ * `FilterList` text for a conjunction of conditions, or `true` for an empty
+ * one. Never empty, so callers splice `AND ${sql}`.
  * `requiresEventsFull` is the routing pass's verdict.
  * Placeholder names are unique per call.
  */
@@ -145,8 +145,8 @@ export function compileEventsPredicate(
 
 /**
  * `search` as SQL over events read as `e` in `projectId`, for the raw-SQL
- * builders: the project and soft-delete conditions the compiler passes
- * inject, then the parenthesized disjunction `eventSearchCondition` emits
+ * builders: the project condition the tenancy pass injects, then the
+ * parenthesized disjunction `eventSearchCondition` emits
  * after its `AND`. `requiresEventsFull` is the routing pass's verdict.
  * Placeholder names are unique per call.
  */

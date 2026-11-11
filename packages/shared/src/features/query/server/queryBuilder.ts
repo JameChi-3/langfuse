@@ -44,7 +44,6 @@ import {
   arrayJoin,
   arrayJoinElements,
   histogram,
-  includeDeleted,
   interval,
   quantile,
   toDate,
@@ -1887,7 +1886,7 @@ export class QueryBuilder {
     const to = utcDateTime(new Date(query.toTimestamp));
     const db = getClickhouseKysely();
     // from events_truncated as e where <filters> and e.start_time between <from> and <to>
-    let events = db.selectFrom("events_truncated as e").$call(includeDeleted());
+    let events = db.selectFrom("events_truncated as e");
     const eventsEb = expressionBuilder(events);
     for (const { lowering, condition } of filters) {
       for (const conjunct of lowerEventsFieldCondition(
